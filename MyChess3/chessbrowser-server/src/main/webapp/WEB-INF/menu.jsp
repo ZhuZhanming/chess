@@ -3,13 +3,13 @@
 
 <ul id="menu">
 	<li><a href="${pageContext.request.contextPath }/index.do" class="index_off"></a></li>
-	<li><a href="" class="role_off"></a></li>
-	<li><a href="${pageContext.request.contextPath }/toFind.do" class="admin_off"></a></li>
+	<li><a href="${pageContext.request.contextPath }/findRole.do" class="role_off"></a></li>
+	<li><a href="" class="admin_off"></a></li>
 	<li><a href="${pageContext.request.contextPath }/findCost.do" class="fee_off"></a></li>
 	<li><a href="" class="account_off"></a></li>
 	<li><a href="" class="service_off"></a></li>
 	<li><a href="" class="bill_off"></a></li>
 	<li><a href="" class="report_off"></a></li>
 	<li><a href="${pageContext.request.contextPath }/info.do" class="information_off"></a></li>
-	<li><a href="${pageContext.request.contextPath }/toSetPwd.do" class="password_off"></a></li>
+	<li><a href="" class="password_off"></a></li>
 </ul>

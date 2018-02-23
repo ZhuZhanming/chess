@@ -83,6 +83,7 @@
         <div id="main">            
             <!--保存操作后的提示信息：成功或者失败-->
             <div id="save_result_info" class="save_success"></div><!--保存失败，数据并发错误！-->
+            <form action="" method="" class="main_form">
                 <div class="text_info clearfix"><span>账号：</span></div>
                 <div class="input_info"><input type="text" readonly="readonly" id="code" class="readonly" value="${player.code }" /></div>
                 <div class="text_info clearfix"><span>胜/败：</span></div>
@@ -109,6 +110,7 @@
                 <div class="button_info clearfix">
                     <input type="button" value="保存" class="btn_save" id="save" />
                 </div>
+            </form>  
         </div>
         <!--主要区域结束-->
         <div id="footer">

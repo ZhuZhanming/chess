@@ -1,8 +1,5 @@
 package com.zzming.chess.service;
 
-import java.util.List;
-import java.util.Map;
-
 import com.zzming.chess.entity.Player;
 
 public interface PlayerService {
@@ -15,8 +12,4 @@ public interface PlayerService {
     Player getPlayer(String code);
     
     void modify(Player player);
-    
-    void setPwd(String code,String oldPwd,String newPwd);
-    
-    List<Map<String,Object>> findGame(String code,Integer status,Integer color,String begin,String end);
 }

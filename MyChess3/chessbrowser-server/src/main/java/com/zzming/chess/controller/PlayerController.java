@@ -2,8 +2,6 @@ package com.zzming.chess.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +17,6 @@ import com.zzming.chess.entity.JsonResult;
 import com.zzming.chess.entity.Player;
 import com.zzming.chess.service.PlayerService;
 import com.zzming.chess.service.exception.NameException;
-import com.zzming.chess.service.exception.ParseStringException;
 import com.zzming.chess.service.exception.PasswordException;
 
 @Controller
@@ -30,7 +27,7 @@ public class PlayerController {
     @RequestMapping("/toLogin.do")
     public String toLogin(HttpSession session){
         session.invalidate();
-        return "login";
+        return "redirect:log_in.html";
     }
     
     @RequestMapping("/login.do")
@@ -47,18 +44,7 @@ public class PlayerController {
         service.modify(player);
         return new JsonResult("ÐÞ¸Ä³É¹¦");
     }
-    @RequestMapping("/toSetPwd.do")
-    public String toSetPwd(){
-    	return "setPwd";
-    }
-    @RequestMapping("/setPwd.do")
-    @ResponseBody
-    public JsonResult setPwd(String oldPwd,String newPwd,HttpSession session){
-    	String code = (String) session.getAttribute("code");
-    	service.setPwd(code, oldPwd, newPwd);
-    	session.invalidate();
-    	return new JsonResult(true);
-    }
+    
     @RequestMapping("/index.do")
     public String index(){
         return "index";
@@ -85,18 +71,6 @@ public class PlayerController {
         request.setAttribute("player", player);
         return "info";
     }
-    @RequestMapping("/toFind.do")
-    public String toFind(){
-    	return "select";
-    }
-    @RequestMapping("/find.do")
-    @ResponseBody
-    public JsonResult find(HttpSession session,Integer status,Integer color,String begin,String end){
-    	String code = (String) session.getAttribute("code");
-    	List<Map<String,Object>> list = service.findGame(code, status, color, begin, end);
-    	System.out.println(list);
-    	return new JsonResult(list);
-    }
     @ExceptionHandler(NameException.class)
     @ResponseBody
     public JsonResult nameExp(NameException e) {
@@ -106,14 +80,5 @@ public class PlayerController {
     @ResponseBody
     public JsonResult passwordExc(PasswordException e) {
         return new JsonResult(3, e);
-    }
-    @ExceptionHandler(ParseStringException.class)
-    @ResponseBody
-    public JsonResult formExp(ParseStringException e) {
-        return new JsonResult(4, e);
-    }
-    @ExceptionHandler(Exception.class)
-    public String exp(Exception e) {
-        return "error";
     }
 }

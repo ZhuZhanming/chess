@@ -27,12 +27,4 @@
 		<property name="prefix" value="/WEB-INF/main/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<mvc:exclude-mapping path="/toLogin.do"/>
-			<mvc:exclude-mapping path="/login.do"/>
-			<bean class="com.zzming.chess.interceptors.SessionInterceptor" />
-		</mvc:interceptor>
-	</mvc:interceptors>
 </beans>
