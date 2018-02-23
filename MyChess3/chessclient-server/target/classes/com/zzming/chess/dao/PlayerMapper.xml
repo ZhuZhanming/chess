@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.zzming.chess.dao.PlayerDao">
+	<!-- 登录查找 -->
+	<select id="findByCode" parameterType="java.lang.String" resultType="com.zzming.chess.entity.Player">
+		SELECT * FROM player WHERE code=#{code}
+	</select>
+	<!--  -->
+	<select id="findById" parameterType="int" resultType="com.zzming.chess.entity.Player">
+		SELECT * FROM player WHERE id=#{id}
+	</select>
+	<!-- 注册 -->
+	<insert id="save" parameterType="com.zzming.chess.entity.Player">
+		INSERT INTO player (id,code,pwd,name,telephone,email)
+		VALUES(seq_player_id.NEXTVAL,#{code},#{pwd},#{name},#{telephone},#{email})
+	</insert>
+	<!-- 所有玩家 -->
+	<select id="allPlayers" resultType="com.zzming.chess.entity.Player">
+		SELECT * FROM player
+	</select>
+	<!-- 修改个人信息 -->
+	<update id="modify" parameterType="com.zzming.chess.entity.Player">
+		UPDATE player 
+		SET pwd=#{pwd},name=#{name},telephone=#{telephone},email=#{email} 
+		WHERE id=#{id}
+	</update>
+</mapper>

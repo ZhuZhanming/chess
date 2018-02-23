@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.zzming.chess.dao.PlayerDao">
+	<select id="findByCode" parameterType="java.lang.String" resultType="com.zzming.chess.entity.Player">
+		SELECT * FROM player WHERE code=#{code}
+	</select>
+		<insert id="save" parameterType="com.zzming.chess.entity.Player">
+		INSERT INTO player (id,code,pwd,name)
+		VALUES(seq_player_id.NEXTVAL,#{code},#{pwd},#{name})
+	</insert>
+	<update id="modifyInfo" parameterType="com.zzming.chess.entity.Player">
+		UPDATE player
+		<set>
+			<if test="name!=null">name=#{name},</if>
+			<if test="telephone!=null">telephone=#{telephone},</if>
+			<if test="email!=null">email=#{email},</if>
+			<if test="pwd!=null">pwd=#{pwd}</if>
+		</set>
+		WHERE code=#{code}
+	</update>
+	<select id="find" parameterType="com.zzming.chess.entity.Condition" resultType="map">
+		SELECT g.id id,r.name rname,b.name bname,g.startTime startTime,(g.endTime-g.startTime) time,DECODE(g.winId,r.id,r.name,b.name) winName
+		FROM game g JOIN player r ON g.redId=r.id JOIN player b ON g.blackId=b.id
+		<where>
+			(g.redId=#{id} or g.blackId=#{id})
+			<if test="status==1">and g.winId=#{id}</if>
+			<if test="status==2">and g.winId&lt;&gt;#{id}</if>
+			<if test="color==2">and g.redId=#{id}</if>
+			<if test="color==1">and g.blackId=#{id}</if>
+			<if test="begin!=null">and g.startTime>#{begin}</if>
+			<if test="end!=null">and g.startTime&lt;#{end}</if>
+		</where>
+	</select>
+</mapper>
